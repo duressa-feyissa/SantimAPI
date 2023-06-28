@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const QRCode = require('qrcode');
 const upload = require('../middleWare/upload');
 const { Donation, validate } = require('../models/donation');
+const config = require('../startUp/config');
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
@@ -129,17 +130,18 @@ router.post('/:id/donate', async (req, res) => {
   };
 
   const donotionId = req.params.id;
-
   const successUrl = "https://santimpay.com/success"; 
   const failureUrl = "https://santimpay.com/failure"; 
-  const notifyUrl = `http://localhost:3001/api/donations${donotionId}/notify${donorId}`; 
+  
+  const baseUrl = config.get('base_url');
+  const notifyUrl = `${baseUrl}/api/donations${donotionId}/notify${donorId}`; 
 
   try {
-    //const url = await getPaymentUrl(data, successUrl, failureUrl, notifyUrl);
-    await sendEmail('Excited User <me@samples.mailgun.org>' ,"duresafeyisa2022@gmail.com", "Donation", "Thank you for your donation");
+    const url = await getPaymentUrl(data, successUrl, failureUrl, notifyUrl);
+    await sendEmail('Excited User <me@samples.mailgun.org>' ,"duresafeyisa2022@gmail.com", "Donation", url);
     donation.donors.push(data);
     await donation.save(); 
-    res.status(201).send("email sent");
+    res.status(201).send(url);
   } catch (err) {
     console.error(err);
     res.status(500).send('Failed to process the donation');
@@ -180,8 +182,8 @@ router.get('/:id/qr-generator', async (req, res) => {
 
   const donationId = req.params.id;
   try {
-    const baseUrl =" http://localhost:3001/api/";
-    const donationPageUrl = `${baseUrl}/donations/${donationId}/donate`;
+    const baseUrl = config.get('base_url');
+    const donationPageUrl = `${baseUrl}/api/donations/${donationId}/donate`;
     const qrCodeDataUrl = await QRCode.toDataURL(donationPageUrl);
     res.send(qrCodeDataUrl);
   } catch (error) {

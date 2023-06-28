@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/ShareTrack';
+const url = 'mongodb+srv://bisry:wtmRJZboberj9rSB@cluster0.2scehsb.mongodb.net/?retryWrites=true&w=majority';
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
 module.exports = function() {

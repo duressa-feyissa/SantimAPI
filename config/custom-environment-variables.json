@@ -1,4 +1,4 @@
 {
     "API_Private_Key": "ShareTrak_Private_Key",
-    "base_url": "http://localhost:3001/api/"
+    "base_url": "base_url"
 }
