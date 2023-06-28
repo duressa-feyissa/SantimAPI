@@ -8,12 +8,9 @@ xU/A8YCNg1GqgfrrLcx3eHnI+Qm6+ppgng==
 
 const GATEWAY_MERCHANT_ID = "9e2dab64-e2bb-4837-9b85-d855dd878d2b";
 
-function createClient() {
-  return new SantimpaySdk(GATEWAY_MERCHANT_ID, PRIVATE_KEY_IN_PEM);
-}
-
 async function getPaymentUrl(data, successRedirectUrl, failureRedirectUrl, notifyUrl) {
-  const client = createClient();
+  const client = new SantimpaySdk(GATEWAY_MERCHANT_ID, PRIVATE_KEY_IN_PEM);
+  console.log(data, notifyUrl);
   try {
     const url = await client.generatePaymentUrl(
       data.id,
