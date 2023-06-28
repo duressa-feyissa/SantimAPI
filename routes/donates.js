@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const QRCode = require('qrcode');
 const upload = require('../middleWare/upload');
 const { Donation, validate } = require('../models/donation');
-const config = require('../startUp/config');
+const config = require('config'); 
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
