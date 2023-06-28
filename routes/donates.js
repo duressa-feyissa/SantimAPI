@@ -122,7 +122,7 @@ router.post('/:id/donate', async (req, res) => {
 
   const donorId = new mongoose.Types.ObjectId(); 
   const data = {
-    id: donorId, 
+    id: donorId.toString(), 
     name,
     email,
     amount,
@@ -134,7 +134,7 @@ router.post('/:id/donate', async (req, res) => {
   const failureUrl = "https://santimpay.com/failure"; 
   
   const baseUrl = config.get('base_url');
-  const notifyUrl = `${baseUrl}/api/donations${donotionId}/notify${donorId}`; 
+  const notifyUrl = `${baseUrl}/api/donations/${donotionId}/notify${donorId}`; 
 
   try {
     const url = await getPaymentUrl(data, successUrl, failureUrl, notifyUrl);
