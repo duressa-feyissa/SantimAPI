@@ -1,5 +1,5 @@
 const { sendEmail } = require('../services/email');
-const getPaymentUrl = require('../services/example');
+const { getPaymentUrl } = require('../services/example');
 const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
