@@ -1,4 +1,4 @@
-const SantimpaySdk = require("../lib/index.js");
+const { SantimpaySdk } = require("../lib/index.js");
 
 const PRIVATE_KEY_IN_PEM = `-----BEGIN EC PRIVATE KEY-----
 MHcCAQEEII0qPPByHBzW3znAladzC0uQDi6vhgctF/r6NYlN4ftmoAoGCCqGSM49
